@@ -61,7 +61,7 @@ public class RobolectricTest extends BaseRobolectricTest {
         测试toast
          */
         mainActivity.findViewById(R.id.toast).performClick();
-        System.out.println(ShadowToast.getTextOfLatestToast());
+        Assert.assertEquals("hello", ShadowToast.getTextOfLatestToast());
     }
 
     /**

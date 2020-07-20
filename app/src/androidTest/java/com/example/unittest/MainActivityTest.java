@@ -1,0 +1,101 @@
+package com.example.unittest;
+
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.espresso.web.assertion.WebViewAssertions;
+import androidx.test.espresso.web.sugar.Web;
+import androidx.test.espresso.web.webdriver.DriverAtoms;
+import androidx.test.espresso.web.webdriver.Locator;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
+import org.hamcrest.Matchers;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+
+/**
+ * Created by shihao on 2017/3/2.
+ */
+@RunWith(AndroidJUnit4.class)
+public class MainActivityTest {
+
+    @Rule
+    public ActivityTestRule activityTestRule = new ActivityTestRule(MainActivity.class);
+
+    @Test
+    public void test() {
+        //通过id找到edittext，在里面输入2并关闭输入法
+        Espresso.onView(ViewMatchers.withId(R.id.editText))
+                .perform(ViewActions.typeText("2"),
+                        ViewActions.closeSoftKeyboard());
+        //通过id找到edittext，在里面输入5并关闭输入法
+        Espresso.onView(ViewMatchers.withId(R.id.editText2))
+                .perform(ViewActions.typeText("5"),
+                        ViewActions.closeSoftKeyboard());
+        //通过id找到button，执行点击事件
+        Espresso.onView(ViewMatchers.withId(R.id.button))
+                .perform(ViewActions.click());
+        //通过id找到textview，并判断是否与文本匹配
+        Espresso.onView(ViewMatchers.withId(R.id.textView))
+                .check(ViewAssertions.matches(ViewMatchers.withText("计算结果：7")));
+    }
+
+    @Test
+    public void testRecycleView() {
+        //通过文本RecycleView找到按钮，并执行点击事件，跳转到RecycleviewActivity
+        Espresso.onView(ViewMatchers.withText("RecycleView"))
+                .perform(ViewActions.click());
+        //通过文本"Item 0"找到view，并检查是否显示，然后执行点击事件，此时会弹出对话框
+        Espresso.onView(ViewMatchers.withText("Item 0"))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+        //通过文本"确定"找到对话框上的确定按钮，执行点击事件，关闭对话框
+        Espresso.onView(ViewMatchers.withText("确定"))
+                .perform(ViewActions.click());
+        //通过文本"Item 2"找到view，并检查是否显示，然后执行点击事件，此时会弹出对话框
+        Espresso.onView(ViewMatchers.withText("Item 2"))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+        //执行点击返回按钮事件，关闭对话框
+        Espresso.pressBack();
+        //通过id找到recycleview，然后执行滑动事件，滑动到21项
+        Espresso.onView(ViewMatchers.withId(R.id.recycleview))
+                .perform(RecyclerViewActions.scrollToPosition(21));
+        //通过文本"Item 20"找到view，并检查是否显示，然后执行点击事件，此时会弹出对话框
+        Espresso.onView(ViewMatchers.withText("Item 20"))
+                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+                .perform(ViewActions.click());
+        //通过文本"确定"找到对话框上的确定按钮，执行点击事件，关闭对话框
+        Espresso.onView(ViewMatchers.withText("确定"))
+                .perform(ViewActions.click());
+        //执行点击返回按钮事件，关闭跳转到RecycleviewActivity
+        Espresso.pressBack();
+    }
+
+    @Test
+    public void testWebView() {
+        //通过文本RecycleView找到按钮，并执行点击事件，跳转到WebViewActivity
+        Espresso.onView(ViewMatchers.withText("WebView"))
+                .perform(ViewActions.click());
+        //通过name为"word"找到搜索输入框
+        Web.onWebView().withElement(DriverAtoms.findElement(Locator.NAME, "word"))
+                //往输入框中输入字符串"android"
+                .perform(DriverAtoms.webKeys("android"))
+                //通过id为"index-bn"找到"百度一下"按钮
+                .withElement(DriverAtoms.findElement(Locator.ID, "index-bn"))
+                //执行点击事件
+                .perform(DriverAtoms.webClick())
+                //通过id为"results"找到结果div
+                .withElement(DriverAtoms.findElement(Locator.ID, "results"))
+                //检查div中是否包含字符串"android"
+                .check(WebViewAssertions
+                        .webMatches(DriverAtoms.getText(), Matchers.containsString("android")));
+        //执行点击返回按钮事件，关闭跳转到WebViewActivity
+        Espresso.pressBack();
+    }
+
+}
