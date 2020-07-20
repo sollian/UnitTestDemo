@@ -1,6 +1,7 @@
 package com.example.unittest.junit;
 
 import com.example.unittest.Api;
+import org.junit.BeforeClass;
 
 /**
  * @author shouxianli on 2020/7/15.
@@ -16,11 +17,11 @@ public abstract class BaseApiTest {
 //        System.out.println("调用构造方法");
     }
 
-//    @BeforeClass
-//    public static void create() {
-//        api = new Api();
+    @BeforeClass
+    public static void create() {
+        api = new Api();
 //        api.create();
-//    }
+    }
 //
 //    @Before
 //    public void resume() {

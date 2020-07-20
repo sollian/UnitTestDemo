@@ -47,7 +47,7 @@ public class ApiParamTest2 extends BaseApiTest {
         return Arrays.asList(new Object[][]{
                 {3, 6, 9},
                 {2, 4, 6},
-                {4, 10, 15}
+                {4, 10, 14}
         });
     }
 
