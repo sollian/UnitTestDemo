@@ -1,4 +1,4 @@
-package com.example.unittest;
+package com.example.unittest.espresso;
 
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
@@ -10,7 +10,11 @@ import androidx.test.espresso.web.sugar.Web;
 import androidx.test.espresso.web.webdriver.DriverAtoms;
 import androidx.test.espresso.web.webdriver.Locator;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
+import com.example.unittest.MainActivity;
+import com.example.unittest.R;
+import java.util.Map;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,13 +25,19 @@ import org.junit.runner.RunWith;
  * Created by shihao on 2017/3/2.
  */
 @RunWith(AndroidJUnit4.class)
+@LargeTest
 public class MainActivityTest {
 
+    /**
+     * 通过使用ActivityTestRule，
+     * 测试框架在每个使用@Test注释的测试方法之前以及在使用@Before注释的方法之前启动被测Activity。
+     * 测试完成后，框架处理关闭活动，所有使用@After注释的方法都会运行。
+     */
     @Rule
     public ActivityTestRule activityTestRule = new ActivityTestRule(MainActivity.class);
 
     @Test
-    public void test() {
+    public void testAdd() {
         //通过id找到edittext，在里面输入2并关闭输入法
         Espresso.onView(ViewMatchers.withId(R.id.editText))
                 .perform(ViewActions.typeText("2"),
@@ -42,6 +52,19 @@ public class MainActivityTest {
         //通过id找到textview，并判断是否与文本匹配
         Espresso.onView(ViewMatchers.withId(R.id.textView))
                 .check(ViewAssertions.matches(ViewMatchers.withText("计算结果：7")));
+    }
+
+    @Test
+    public void testListView() {
+        //AdapterView使用onData方法匹配
+        Espresso.onData(
+                Matchers.allOf(
+                        Matchers.is(Matchers.instanceOf(Map.class)),
+                        Matchers.hasValue("50")
+                )
+        ).perform(ViewActions.click());
+        Espresso.onView(ViewMatchers.withId(R.id.list_result))
+                .check(ViewAssertions.matches(ViewMatchers.withText("50")));
     }
 
     @Test
@@ -62,6 +85,7 @@ public class MainActivityTest {
                 .perform(ViewActions.click());
         //执行点击返回按钮事件，关闭对话框
         Espresso.pressBack();
+
         //通过id找到recycleview，然后执行滑动事件，滑动到21项
         Espresso.onView(ViewMatchers.withId(R.id.recycleview))
                 .perform(RecyclerViewActions.scrollToPosition(21));

@@ -68,6 +68,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
     androidTestImplementation('androidx.test.espresso:espresso-contrib:3.2.0') {
         transitive false
-    };
+    }
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator-v18:2.2.0-alpha1'
     androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
 }

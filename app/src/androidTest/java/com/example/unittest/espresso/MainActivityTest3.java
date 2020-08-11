@@ -1,27 +1,22 @@
-package com.example.unittest;
+package com.example.unittest.espresso;
 
-
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+import com.example.unittest.MainActivity;
+import com.example.unittest.R;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
@@ -38,50 +33,50 @@ public class MainActivityTest3 {
 
     @Test
     public void mainActivityTest2() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editText),
+        ViewInteraction appCompatEditText = Espresso.onView(
+                Matchers.allOf(ViewMatchers.withId(R.id.editText),
                         childAtPosition(
-                                allOf(withId(R.id.activity_main),
+                                Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
+                                                ViewMatchers.withClassName(Matchers.is("android.widget.LinearLayout")),
                                                 3)),
                                 0),
-                        isDisplayed()));
-        appCompatEditText.perform(replaceText("7"), closeSoftKeyboard());
+                        ViewMatchers.isDisplayed()));
+        appCompatEditText.perform(ViewActions.replaceText("7"), ViewActions.closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editText2),
+        ViewInteraction appCompatEditText2 = Espresso.onView(
+                Matchers.allOf(ViewMatchers.withId(R.id.editText2),
                         childAtPosition(
-                                allOf(withId(R.id.activity_main),
+                                Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
+                                                ViewMatchers.withClassName(Matchers.is("android.widget.LinearLayout")),
                                                 3)),
                                 1),
-                        isDisplayed()));
-        appCompatEditText2.perform(replaceText("8"), closeSoftKeyboard());
+                        ViewMatchers.isDisplayed()));
+        appCompatEditText2.perform(ViewActions.replaceText("8"), ViewActions.closeSoftKeyboard());
 
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.button), withText("计算"),
+        ViewInteraction appCompatButton = Espresso.onView(
+                Matchers.allOf(ViewMatchers.withId(R.id.button), ViewMatchers.withText("计算"),
                         childAtPosition(
-                                allOf(withId(R.id.activity_main),
+                                Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
+                                                ViewMatchers.withClassName(Matchers.is("android.widget.LinearLayout")),
                                                 3)),
                                 2),
-                        isDisplayed()));
-        appCompatButton.perform(click());
+                        ViewMatchers.isDisplayed()));
+        appCompatButton.perform(ViewActions.click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textView), withText("计算结果：15"),
+        ViewInteraction textView = Espresso.onView(
+                Matchers.allOf(ViewMatchers.withId(R.id.textView), ViewMatchers.withText("计算结果：15"),
                         childAtPosition(
-                                allOf(withId(R.id.activity_main),
+                                Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(
                                                         android.widget.LinearLayout.class),
                                                 3)),
                                 3),
-                        isDisplayed()));
-        textView.check(matches(withText("计算结果：15")));
+                        ViewMatchers.isDisplayed()));
+        textView.check(ViewAssertions.matches(ViewMatchers.withText("计算结果：15")));
     }
 
     private static Matcher<View> childAtPosition(

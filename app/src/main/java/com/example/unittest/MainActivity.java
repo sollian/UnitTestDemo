@@ -3,12 +3,21 @@ package com.example.unittest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends BaseActivity implements OnClickListener {
 
@@ -68,7 +77,28 @@ public class MainActivity extends BaseActivity implements OnClickListener {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, RecycleviewActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0x1000);
+            }
+        });
+
+        final TextView vListResult = findViewById(R.id.list_result);
+        final ListView vList = findViewById(R.id.list);
+        List<Map<String, String>> data = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            Map<String, String> map = new ArrayMap<>();
+            map.put("id", String.valueOf(i));
+            data.add(map);
+        }
+        vList.setAdapter(new SimpleAdapter(this,
+                data,
+                android.R.layout.simple_list_item_1,
+                new String[]{"id"},
+                new int[]{android.R.id.text1}
+        ));
+        vList.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                vListResult.setText(String.valueOf(position));
             }
         });
     }
@@ -87,5 +117,11 @@ public class MainActivity extends BaseActivity implements OnClickListener {
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        tv.setText(data.getStringExtra("data"));
     }
 }
