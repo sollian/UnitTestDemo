@@ -27,12 +27,12 @@ public class MainActivityTest extends BaseRobolectricTest {
         controller.start();
         controller.resume();
 
-        EditText editText = mainActivity.findViewById(R.id.editText);
+        EditText editText = mainActivity.findViewById(R.id.num1);
         editText.setText("2");
-        EditText editText2 = mainActivity.findViewById(R.id.editText2);
+        EditText editText2 = mainActivity.findViewById(R.id.num2);
         editText2.setText("5");
-        mainActivity.findViewById(R.id.button).performClick();
-        TextView textView = mainActivity.findViewById(R.id.textView);
+        mainActivity.findViewById(R.id.calculate).performClick();
+        TextView textView = mainActivity.findViewById(R.id.sum);
         Assert.assertEquals("计算结果：7", textView.getText());
     }
 

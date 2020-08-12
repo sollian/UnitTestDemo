@@ -1,6 +1,5 @@
 package com.example.unittest;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import androidx.annotation.Nullable;

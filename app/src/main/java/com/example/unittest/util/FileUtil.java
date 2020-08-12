@@ -1,4 +1,4 @@
-package com.example.unittest;
+package com.example.unittest.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

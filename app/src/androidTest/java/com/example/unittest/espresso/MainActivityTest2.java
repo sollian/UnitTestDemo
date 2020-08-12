@@ -31,7 +31,7 @@ public class MainActivityTest2 {
 
     @Test
     public void testWeb() {
-        Espresso.onView(ViewMatchers.withId(R.id.button3))
+        Espresso.onView(ViewMatchers.withId(R.id.go_web))
                 .perform(ViewActions.click());
         Intents.intended(IntentMatchers.hasExtra(WebViewActivity.EXTRA_URL, "https://m.baidu.com"));
     }
@@ -48,9 +48,9 @@ public class MainActivityTest2 {
         Intents.intending(IntentMatchers.hasComponent("com.example.unittest.RecycleviewActivity"))
                 .respondWith(activityResult);
 
-        Espresso.onView(ViewMatchers.withId(R.id.button4))
+        Espresso.onView(ViewMatchers.withId(R.id.go_list))
                 .perform(ViewActions.click());
-        Espresso.onView(ViewMatchers.withId(R.id.textView))
+        Espresso.onView(ViewMatchers.withId(R.id.sum))
                 .check(ViewAssertions.matches(ViewMatchers.withText("hello world")));
     }
 }

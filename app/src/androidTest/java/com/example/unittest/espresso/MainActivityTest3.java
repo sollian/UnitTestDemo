@@ -34,7 +34,7 @@ public class MainActivityTest3 {
     @Test
     public void mainActivityTest2() {
         ViewInteraction appCompatEditText = Espresso.onView(
-                Matchers.allOf(ViewMatchers.withId(R.id.editText),
+                Matchers.allOf(ViewMatchers.withId(R.id.num1),
                         childAtPosition(
                                 Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
@@ -45,7 +45,7 @@ public class MainActivityTest3 {
         appCompatEditText.perform(ViewActions.replaceText("7"), ViewActions.closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = Espresso.onView(
-                Matchers.allOf(ViewMatchers.withId(R.id.editText2),
+                Matchers.allOf(ViewMatchers.withId(R.id.num2),
                         childAtPosition(
                                 Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
@@ -56,7 +56,7 @@ public class MainActivityTest3 {
         appCompatEditText2.perform(ViewActions.replaceText("8"), ViewActions.closeSoftKeyboard());
 
         ViewInteraction appCompatButton = Espresso.onView(
-                Matchers.allOf(ViewMatchers.withId(R.id.button), ViewMatchers.withText("计算"),
+                Matchers.allOf(ViewMatchers.withId(R.id.calculate), ViewMatchers.withText("计算"),
                         childAtPosition(
                                 Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
@@ -67,7 +67,7 @@ public class MainActivityTest3 {
         appCompatButton.perform(ViewActions.click());
 
         ViewInteraction textView = Espresso.onView(
-                Matchers.allOf(ViewMatchers.withId(R.id.textView), ViewMatchers.withText("计算结果：15"),
+                Matchers.allOf(ViewMatchers.withId(R.id.sum), ViewMatchers.withText("计算结果：15"),
                         childAtPosition(
                                 Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(

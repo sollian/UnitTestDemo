@@ -1,7 +1,6 @@
 package com.example.unittest.junit.theory;
 
 import org.junit.Assume;
-import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;

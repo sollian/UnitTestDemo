@@ -10,6 +10,7 @@ import org.junit.runners.Suite.SuiteClasses;
 /**
  * 测试套件，按顺序执行一组测试。
  * 测试套件可以嵌套
+ *
  * @author shouxianli on 2020/7/15.
  */
 @RunWith(Suite.class)

@@ -1,7 +1,7 @@
 package com.example.unittest.PowerMockito;
 
-import com.example.unittest.Api;
-import com.example.unittest.Dao;
+import com.example.unittest.data.Api;
+import com.example.unittest.data.Dao;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import org.junit.Assert;

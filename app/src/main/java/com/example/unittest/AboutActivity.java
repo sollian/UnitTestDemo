@@ -1,6 +1,5 @@
 package com.example.unittest;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class AboutActivity extends BaseActivity {

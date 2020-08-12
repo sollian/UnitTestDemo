@@ -1,7 +1,7 @@
 package com.example.unittest.junit.rule;
 
-import com.example.unittest.Api;
-import com.example.unittest.FileUtil;
+import com.example.unittest.data.Api;
+import com.example.unittest.util.FileUtil;
 import java.io.File;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matchers;
@@ -39,7 +39,6 @@ public class RuleTest {
     @Rule
     public TemporaryFolder tempFolder = new TemporaryFolder();
 
-    @Ignore
     @Test
     public void testFileCreateAndWrite() throws Exception {
         File file = tempFolder.newFile("simple.txt");
@@ -53,7 +52,6 @@ public class RuleTest {
     @Rule
     public ErrorCollector collector = new ErrorCollector();
 
-    @Ignore
     @Test
     public void testMoreCollector() throws Exception {
         String s = null;
@@ -134,7 +132,6 @@ public class RuleTest {
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
-    @Ignore
     @Test
     public void testAdminLogin2() {
         Api api = new Api();

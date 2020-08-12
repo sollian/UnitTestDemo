@@ -39,18 +39,18 @@ public class MainActivityTest {
     @Test
     public void testAdd() {
         //通过id找到edittext，在里面输入2并关闭输入法
-        Espresso.onView(ViewMatchers.withId(R.id.editText))
+        Espresso.onView(ViewMatchers.withId(R.id.num1))
                 .perform(ViewActions.typeText("2"),
                         ViewActions.closeSoftKeyboard());
         //通过id找到edittext，在里面输入5并关闭输入法
-        Espresso.onView(ViewMatchers.withId(R.id.editText2))
+        Espresso.onView(ViewMatchers.withId(R.id.num2))
                 .perform(ViewActions.typeText("5"),
                         ViewActions.closeSoftKeyboard());
         //通过id找到button，执行点击事件
-        Espresso.onView(ViewMatchers.withId(R.id.button))
+        Espresso.onView(ViewMatchers.withId(R.id.calculate))
                 .perform(ViewActions.click());
         //通过id找到textview，并判断是否与文本匹配
-        Espresso.onView(ViewMatchers.withId(R.id.textView))
+        Espresso.onView(ViewMatchers.withId(R.id.sum))
                 .check(ViewAssertions.matches(ViewMatchers.withText("计算结果：7")));
     }
 

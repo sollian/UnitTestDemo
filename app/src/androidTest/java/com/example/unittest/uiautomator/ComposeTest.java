@@ -12,7 +12,6 @@ import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiSelector;
 import com.example.unittest.MainActivity;
 import com.example.unittest.R;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,10 +42,10 @@ public class ComposeTest {
 
     @Test
     public void testAdd() throws Exception {
-        uiDevice.findObject(new UiSelector().resourceId("com.example.unittest:id/editText")).setText("2");
-        uiDevice.findObject(By.res("com.example.unittest:id/editText2")).setText("5");
-        uiDevice.findObject(By.res(PKG_NAME, "button")).click();
-        Espresso.onView(ViewMatchers.withId(R.id.textView))
+        uiDevice.findObject(new UiSelector().resourceId("com.example.unittest:id/num1")).setText("2");
+        uiDevice.findObject(By.res("com.example.unittest:id/num2")).setText("5");
+        uiDevice.findObject(By.res(PKG_NAME, "calculate")).click();
+        Espresso.onView(ViewMatchers.withId(R.id.sum))
                 .check(ViewAssertions.matches(ViewMatchers.withText("计算结果：7")));
     }
 }

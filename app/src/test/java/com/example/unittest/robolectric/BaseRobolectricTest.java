@@ -13,7 +13,6 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.rule.PowerMockRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
@@ -23,12 +22,8 @@ import org.robolectric.shadows.ShadowLog;
  * @author shouxianli on 2020/7/17.
  */
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = "AndroidManifest.xml",
-        sdk = 28,
-        //该数组中的类自动替代原始对象
-        shadows = {ShadowLog.class},
-        application = MyApplication.class
-)
+//该数组中的类自动替代原始对象
+@Config(manifest = "AndroidManifest.xml", sdk = 28, shadows = ShadowLog.class, application = MyApplication.class)
 //若测试失败，先检查是不是有类没有加进来
 @PowerMockIgnore({
         "org.mockito.*",

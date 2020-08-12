@@ -1,4 +1,4 @@
-package com.example.unittest;
+package com.example.unittest.data;
 
 /**
  * @author shouxianli on 2020/7/15.

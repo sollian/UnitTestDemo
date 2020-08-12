@@ -1,15 +1,17 @@
-package com.example.unittest;
+package com.example.unittest.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import com.example.unittest.MyApplication;
 
 public class MySharePreference {
+
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
     public MySharePreference(SharedPreferences sharedPref) {
         this.sharedPref = sharedPref;
-        this.editor = sharedPref.edit();
+        editor = sharedPref.edit();
     }
 
     public MySharePreference() {

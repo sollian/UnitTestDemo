@@ -46,8 +46,8 @@ public class RecycleviewActivity extends BaseActivity {
 
     public class MRecAdapter extends RecyclerView.Adapter<MRecAdapter.RecViewHolder> {
 
-        private List<String> data = new ArrayList<>();
-        private Context context;
+        private final List<String> data = new ArrayList<>();
+        private final Context context;
 
         public MRecAdapter(Context context, List<String> data) {
             this.context = context;

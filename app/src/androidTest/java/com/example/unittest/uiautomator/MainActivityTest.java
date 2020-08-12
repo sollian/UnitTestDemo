@@ -49,11 +49,11 @@ public class MainActivityTest {
 
     @Test
     public void testAdd() throws Exception {
-        uiDevice.findObject(new UiSelector().resourceId("com.example.unittest:id/editText")).setText("2");
-        uiDevice.findObject(By.res("com.example.unittest:id/editText2")).setText("5");
-        uiDevice.findObject(By.res(PKG_NAME, "button")).click();
+        uiDevice.findObject(new UiSelector().resourceId("com.example.unittest:id/num1")).setText("2");
+        uiDevice.findObject(By.res("com.example.unittest:id/num2")).setText("5");
+        uiDevice.findObject(By.res(PKG_NAME, "calculate")).click();
         Assert.assertEquals("计算结果：7",
-                uiDevice.findObject(new UiSelector().resourceId("com.example.unittest:id/textView")).getText());
+                uiDevice.findObject(new UiSelector().resourceId("com.example.unittest:id/sum")).getText());
     }
 
     @Test

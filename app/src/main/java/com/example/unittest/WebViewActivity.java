@@ -32,7 +32,8 @@ public class WebViewActivity extends BaseActivity {
 
         });
         String url = getIntent().getStringExtra(EXTRA_URL);
-        if (url != null && url.contains("http"))
+        if (url != null && url.contains("http")) {
             webView.loadUrl(url);
+        }
     }
 }
