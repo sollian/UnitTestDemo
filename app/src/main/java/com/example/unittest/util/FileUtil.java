@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ * 文件操作类
+ *
  * @author shouxianli on 2020/7/16.
  */
 public class FileUtil {

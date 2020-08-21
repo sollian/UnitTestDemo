@@ -1,4 +1,4 @@
-package com.example.unittest.PowerMockito;
+package com.example.unittest.powermockito;
 
 import com.example.unittest.data.Api;
 import com.example.unittest.data.Dao;
@@ -17,6 +17,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/17.
  */
 @RunWith(PowerMockRunner.class)

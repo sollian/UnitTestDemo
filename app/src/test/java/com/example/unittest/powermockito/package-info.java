@@ -15,4 +15,4 @@
  * 3、注意和Mockito版本的对应。否则可能出现org.mockito.exceptions.misusing.NotAMockException的问题‼️
  */
 
-package com.example.unittest.PowerMockito;
+package com.example.unittest.powermockito;

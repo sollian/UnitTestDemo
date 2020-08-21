@@ -7,6 +7,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/17.
  */
 public class MyService extends Service {

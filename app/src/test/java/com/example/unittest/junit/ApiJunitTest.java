@@ -3,6 +3,8 @@ package com.example.unittest.junit;
 import org.junit.Test;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/15.
  */
 public class ApiJunitTest extends BaseApiTest {
@@ -18,7 +20,7 @@ public class ApiJunitTest extends BaseApiTest {
     /**
      * 规定时间内执行完毕，则测试通过
      *
-     * @throws InterruptedException
+     * @throws InterruptedException 抛出异常
      */
     @Test(timeout = 600)
     public void testTimeout() throws InterruptedException {

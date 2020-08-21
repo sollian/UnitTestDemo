@@ -24,10 +24,6 @@ public class ApiParamTest2 extends BaseApiTest {
 
     /**
      * 参数按顺序传递
-     *
-     * @param num1
-     * @param num2
-     * @param result
      */
     public ApiParamTest2(int num1, int num2, int result) {
         this.num1 = num1;
@@ -39,8 +35,6 @@ public class ApiParamTest2 extends BaseApiTest {
 
     /**
      * 要传递的参数，可以传递多组
-     *
-     * @return
      */
     @Parameters
     public static Iterable<Object[]> data() {

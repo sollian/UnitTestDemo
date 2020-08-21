@@ -19,6 +19,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/16.
  */
 @RunWith(MockitoJUnitRunner.class)

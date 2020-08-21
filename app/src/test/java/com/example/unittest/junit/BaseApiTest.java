@@ -4,6 +4,8 @@ import com.example.unittest.data.Api;
 import org.junit.BeforeClass;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/15.
  */
 public abstract class BaseApiTest {

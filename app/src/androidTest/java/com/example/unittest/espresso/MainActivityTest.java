@@ -20,9 +20,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
 /**
- * Created by shihao on 2017/3/2.
+ * 测试类
+ * Created by shouxianli on 2017/3/2.
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest

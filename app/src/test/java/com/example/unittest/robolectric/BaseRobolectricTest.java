@@ -19,6 +19,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowLog;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/17.
  */
 @RunWith(RobolectricTestRunner.class)

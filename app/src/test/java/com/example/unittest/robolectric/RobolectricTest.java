@@ -17,6 +17,8 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowToast;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/17.
  */
 public class RobolectricTest extends BaseRobolectricTest {
@@ -37,7 +39,6 @@ public class RobolectricTest extends BaseRobolectricTest {
     @Test
     public void test2() {
         ActivityController<MainActivity> controller = Robolectric.buildActivity(MainActivity.class);
-        MainActivity mainActivity = controller.get();
         controller.create();
         controller.start();
         controller.resume();
@@ -45,6 +46,7 @@ public class RobolectricTest extends BaseRobolectricTest {
         /*
         测试activity跳转
          */
+        MainActivity mainActivity = controller.get();
         mainActivity.findViewById(R.id.go_about).performClick();
         // 获取对应的Shadow类
         ShadowActivity shadowActivity = Shadows.shadowOf(mainActivity);
