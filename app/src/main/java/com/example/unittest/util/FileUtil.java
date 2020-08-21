@@ -1,5 +1,6 @@
 package com.example.unittest.util;
 
+import androidx.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,6 +25,10 @@ public class FileUtil {
         }
     }
 
+    /**
+     * 读取文件内容
+     */
+    @Nullable
     public static String readFileToString(File file) {
         BufferedReader bufferedReader = null;
         try {
