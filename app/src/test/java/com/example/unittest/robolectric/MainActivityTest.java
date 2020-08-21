@@ -15,6 +15,8 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.shadows.ShadowAlertDialog;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/7/20.
  */
 public class MainActivityTest extends BaseRobolectricTest {
