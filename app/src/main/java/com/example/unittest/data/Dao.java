@@ -7,7 +7,28 @@ package com.example.unittest.data;
  */
 public class Dao {
 
-    public void save() {
+    static {
+        System.out.println("init Dao");
+    }
 
+    private int id;
+
+    public Dao() {
+        id = 11;
+    }
+
+    public void save() {
+        System.out.println("save");
+    }
+
+    public boolean delete() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Dao{" +
+                "id=" + id +
+                '}';
     }
 }

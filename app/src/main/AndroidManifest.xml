@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".RecycleviewActivity" />
         <activity android:name=".WebViewActivity" />
+        <activity android:name=".MyFragmentActivity" />
 
         <receiver android:name=".MyBroadcastReceiver">
             <intent-filter>

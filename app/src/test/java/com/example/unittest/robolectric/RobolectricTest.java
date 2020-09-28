@@ -99,9 +99,9 @@ public class RobolectricTest extends BaseRobolectricTest {
         Intent intent = new Intent(getApplication(), MyService.class);
         intent.putExtra("test", "数据传输");
 
-        MyService serviceController = Robolectric.setupService(MyService.class);
-        serviceController.onStartCommand(intent, 0, 1);
+        MyService service = Robolectric.setupService(MyService.class);
+        service.onStartCommand(intent, 0, 1);
 
-        Assert.assertEquals("数据传输", serviceController.getMsg());
+        Assert.assertEquals("数据传输", service.getMsg());
     }
 }

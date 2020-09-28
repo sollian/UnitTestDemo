@@ -1,6 +1,7 @@
 package com.example.unittest.mockito;
 
 import com.example.unittest.data.Api;
+import com.example.unittest.data.Callback;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +27,7 @@ import org.mockito.stubbing.Answer;
 @RunWith(MockitoJUnitRunner.class)
 public class ApiMockitoTest {
 
-    @Mock
+    @Spy
     private Api api;
 
     /**
@@ -42,10 +43,37 @@ public class ApiMockitoTest {
 
     @Test
     public void test1() {
-//        Api api = new Api();//Mockito.mock(Api.class);
-        api.login();
+        Api api = new Api();
+        Callback callback = Mockito.mock(Callback.class);
+        api.register(callback);
         //mock对象才能verify‼️
-        Mockito.verify(api).login();
+        Mockito.verify(callback).registerSuccess();
+    }
+
+    /**
+     * 修改方法返回值
+     */
+    @Test
+    public void test1_1() {
+        Mockito.doReturn("111", "222", "333")
+                .doCallRealMethod()
+                .when(api).getTel();
+        System.out.println(api.getTel());
+        System.out.println(api.getTel());
+        System.out.println(api.getTel());
+        System.out.println(api.getTel());
+    }
+
+    @Test
+    public void test1_2() {
+        Mockito.doReturn("1111").when(api).getTel();
+        System.out.println(api.getTel());
+    }
+
+    @Test
+    public void test1_3() {
+        Mockito.when(api.getTel()).thenReturn("1111");
+        System.out.println(api.getTel());
     }
 
     /**
@@ -54,10 +82,9 @@ public class ApiMockitoTest {
     @Test
     public void test2() {
 //        Api api = new Api();//Mockito.mock(Api.class);
-        Mockito.when(api.getUserNameById(Mockito.anyInt())).thenReturn("Sam");
-//        Mockito.doCallRealMethod().when(api).getUserNameById(Mockito.anyInt());
-        Assert.assertEquals("Sam", api.getUserNameById(3));
-        Mockito.verify(api).getUserNameById(Mockito.anyInt());
+        Mockito.doReturn("Sam").when(api).getUserNameById(Mockito.anyInt(), Mockito.anyInt());
+        Assert.assertEquals("Sam", api.getUserNameById(3, 4));
+        Mockito.verify(api).getUserNameById(Mockito.eq(3), Mockito.eq(4));
     }
 
     /**
@@ -65,25 +92,14 @@ public class ApiMockitoTest {
      */
     @Test
     public void test3() throws Exception {
-        Mockito.when(mockList.get(Mockito.anyInt()))
-                .thenReturn("不管请求第几个参数 我都返回这句");
-        System.out.println(mockList.get(0));
-        System.out.println(mockList.get(39));
+        Mockito.doReturn(true)
+                .when(mockList).addAll(Mockito.argThat(new ListOfTwoElements()));
 
-        Mockito.when(mockList.addAll(Mockito.argThat(getListMatcher())))
-                //thenXX方法系列，thenCallRealMethod等
-                .thenReturn(true);
+        boolean result1 = mockList.addAll(Arrays.asList("one", "two"));
+        boolean result2 = mockList.addAll(Arrays.asList("one", "two", "three"));
 
-        boolean b1 = mockList.addAll(Arrays.asList("one", "two"));
-        boolean b2 = mockList.addAll(Arrays.asList("one", "two", "three"));
-
-        Mockito.verify(mockList).addAll(Mockito.argThat(getListMatcher()));
-        Assert.assertTrue(b1);
-        Assert.assertTrue(!b2);
-    }
-
-    private ListOfTwoElements getListMatcher() {
-        return new ListOfTwoElements();
+        Assert.assertTrue(result1);
+        Assert.assertTrue(!result2);
     }
 
     /**
@@ -94,11 +110,6 @@ public class ApiMockitoTest {
         @Override
         public boolean matches(List list) {
             return list.size() == 2;
-        }
-
-        public String toString() {
-            //printed in verification errors
-            return "[list of 2 elements]";
         }
     }
 
@@ -116,8 +127,7 @@ public class ApiMockitoTest {
         mockList.add("three times");
         mockList.add("three times");
 
-        Mockito.verify(mockList)
-                .add("once");  //验证mockList.add("once")调用了一次 - times(1) is used by default
+        Mockito.verify(mockList).add("once");  //验证mockList.add("once")调用了一次 - times(1) is used by default
         Mockito.verify(mockList, Mockito.times(1)).add("once");
 
         //调用多次校验
@@ -136,7 +146,7 @@ public class ApiMockitoTest {
      * 验证执行顺序
      */
     @Test
-    public void test5() throws Exception {
+    public void test5() {
         List singleMock = Mockito.mock(List.class);
 
         singleMock.add("first add");
@@ -177,9 +187,10 @@ public class ApiMockitoTest {
         Mockito.verify(mockList).add("one");
         Mockito.verify(mockList, Mockito.never()).add("two");
 
-        //打开后测试失败。因为这里的add操作时unverify的
-//        firstMock.add("go");
+        //打开后测试失败。因为这里的add操作是unverify的
+//        mockList.add("go");
         Mockito.verifyNoMoreInteractions(mockList);
+//        Mockito.verifyZeroInteractions(mockList);
     }
 
     /**
@@ -191,6 +202,10 @@ public class ApiMockitoTest {
                 .thenReturn("John")
                 .thenReturn("Jim", "God")
                 .thenThrow(new NullPointerException("holy shit"));
+//        Mockito.doReturn("John")
+//                .doReturn("Jim", "God")
+//                .doThrow(new NullPointerException("holy shit"))
+//                .when(api).getUserNameById(Mockito.anyInt());
         //John
         System.out.println(api.getUserNameById(0));
         //Jim

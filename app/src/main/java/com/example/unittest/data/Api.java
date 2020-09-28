@@ -13,6 +13,10 @@ public class Api {
         return name + '_' + time;
     }
 
+    private static String genKeyInner(String name, long time) {
+        return name + '_' + time;
+    }
+
     public void create() {
         System.out.println("初始化api资源");
     }
@@ -56,12 +60,19 @@ public class Api {
         return a + b;
     }
 
+    public int minus(int a, int b) {
+        return a - b;
+    }
+
     public String getName() {
+        System.out.println("getName, filed name is " + name);
         return name;
     }
 
     public void setName(String name) {
+        System.out.println("setName, param is " + name);
         this.name = name;
+        System.out.println("setName, field name is " + this.name);
     }
 
     public void login() {
@@ -70,8 +81,6 @@ public class Api {
         } else {
             System.out.println("invalid name");
         }
-
-        new Dao().save();
     }
 
     private final boolean checkName(String name) {
@@ -79,9 +88,44 @@ public class Api {
         return true;
     }
 
+    public void register(Callback callback) {
+        if (callback != null) {
+            callback.registerSuccess();
+        }
+    }
+
+    public void realLogin() {
+        onRealLogin();
+        new Dao().save();
+    }
+
+    public void onRealLogin() {
+    }
+
+    public boolean deleteUser() {
+        return new Dao().delete();
+    }
+
     public String getUserNameById(int id) {
         return "Jimy";
     }
 
+    public String getUserNameById(int id, int index) {
+        return "Jimy";
+    }
 
+    public String getTel() {
+        System.out.println("getTel");
+        return "123456";
+    }
+
+    public static String getCache(String key) {
+        System.out.println("getCache");
+        return "prefix_" + getCacheById(key);
+    }
+
+    public static String getCacheById(String key) {
+        System.out.println("getCacheById");
+        return key;
+    }
 }

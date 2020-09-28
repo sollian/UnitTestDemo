@@ -25,7 +25,7 @@ import org.robolectric.shadows.ShadowLog;
  */
 @RunWith(RobolectricTestRunner.class)
 //该数组中的类自动替代原始对象
-@Config(manifest = "AndroidManifest.xml", sdk = 28, shadows = ShadowLog.class, application = MyApplication.class)
+@Config(manifest = "AndroidManifest.xml", sdk = 23, shadows = ShadowLog.class, application = MyApplication.class)
 //若测试失败，先检查是不是有类没有加进来
 @PowerMockIgnore({
         "org.mockito.*",
@@ -35,6 +35,7 @@ import org.robolectric.shadows.ShadowLog;
         "org.json.*",
         "sun.security.*",
         "javax.net.*",
+        "com.example.unittest.MyFragmentX",
         //注意一定要添加自定义的application类
         "com.example.unittest.MyApplication",
 })

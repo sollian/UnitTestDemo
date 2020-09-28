@@ -1,6 +1,7 @@
 package com.example.unittest.junit.rule;
 
 import com.example.unittest.data.Api;
+import com.example.unittest.junit.BaseApiTest;
 import com.example.unittest.util.FileUtil;
 import java.io.File;
 import org.hamcrest.CoreMatchers;
@@ -24,7 +25,7 @@ import org.junit.runner.Description;
  *
  * @author shouxianli on 2020/7/16.
  */
-public class RuleTest {
+public class RuleTest extends BaseApiTest {
 
     ///////////////获取测试方法名称
     @Rule
@@ -34,6 +35,7 @@ public class RuleTest {
     public void testName() {
         System.out.println(testName.getMethodName());
     }
+
 
     //////////////生成临时文件或文件夹
     @Rule
@@ -88,7 +90,7 @@ public class RuleTest {
         }
     };
 
-    @Ignore
+    //    @Ignore
     @Test
     public void verifierRunsAfterTest() {
         sequence = "do it";

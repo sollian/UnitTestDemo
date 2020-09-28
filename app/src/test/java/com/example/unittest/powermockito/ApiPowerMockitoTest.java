@@ -12,6 +12,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
+import org.powermock.api.support.Stubber;
+import org.powermock.api.support.SuppressCode;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.reflect.Whitebox;
@@ -23,7 +25,7 @@ import org.powermock.reflect.Whitebox;
  */
 @RunWith(PowerMockRunner.class)
 //该注解标注到类或者方法上
-@PrepareForTest(Api.class)
+@PrepareForTest({Api.class, Dao.class})
 public class ApiPowerMockitoTest {
 
     private Api api;
@@ -58,6 +60,13 @@ public class ApiPowerMockitoTest {
                 .invoke("checkName", Mockito.isNull());
     }
 
+    @Test
+    public void test2_1() {
+        Api mockApi = PowerMockito.spy(api);
+        mockApi.realLogin();
+        Mockito.verify(mockApi).onRealLogin();
+    }
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
@@ -68,20 +77,19 @@ public class ApiPowerMockitoTest {
     @Test
 //    @Test(expected = NullPointerException.class)
     public void test3() throws Exception {
-        Dao dao = new Dao();
-        Dao mockDao = PowerMockito.spy(dao);
+        Dao mockDao = Mockito.mock(Dao.class);
         PowerMockito.whenNew(Dao.class)
                 .withNoArguments()
                 //也支持连续调用
                 .thenReturn(mockDao)
                 .thenThrow(new NullPointerException("null"));
         //login中会创建Dao，并调用save方法
-        api.login();
+        api.realLogin();
         Mockito.verify(mockDao).save();
 
         System.out.println("再次调用就崩了");
         expectedException.expect(NullPointerException.class);
-        api.login();
+        api.realLogin();
     }
 
     /**
@@ -89,20 +97,47 @@ public class ApiPowerMockitoTest {
      */
     @Test
     public void test4() throws Exception {
-        PowerMockito.suppress(Whitebox.getMethod(Api.class, "checkName", String.class));
+        SuppressCode.suppressMethod(Whitebox.getMethod(Api.class, "checkName", String.class));
         /*
         注意这里的打印信息！
         checkName作为if的判断条件，在suppress后，判断条件直接是false
          */
         api.login();
+    }
 
-        /*
-        suppress checkName后，如果再verify这个方法就会测试失败
-         */
-//        Api mockApi = PowerMockito.spy(api);
+    /**
+     * suppress的方法不可verify
+     *
+     * @throws Exception
+     */
+    @Test
+    public void test4_1() throws Exception {
+        SuppressCode.suppressMethod(Whitebox.getMethod(Api.class, "checkName", String.class));
+
+        Api mockApi = PowerMockito.spy(api);
 //        mockApi.login();
-//        PowerMockito.verifyPrivate(mockApi)
-//                .invoke("checkName", Mockito.isNull());
+        PowerMockito.verifyPrivate(mockApi)
+                .invoke("checkName", Mockito.isNull());
+    }
+
+    /**
+     * suppress filed
+     */
+    @Test
+    public void test4_2() {
+        SuppressCode.suppressField(Api.class, "name");
+        api.setName("111");
+        System.out.println(api.getName());
+    }
+
+    /**
+     * suppress 构造方法
+     */
+    @Test
+    public void test4_3() {
+        SuppressCode.suppressConstructor(Dao.class);
+        Dao dao = new Dao();
+        System.out.println(dao);
     }
 
     /**
@@ -117,12 +152,24 @@ public class ApiPowerMockitoTest {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args)
                             throws Throwable {
-                        System.out.println(args[0]);
+                        System.out.println("checkname, param is " + args[0]);
                         return false;
                     }
                 });
         api.setName("Sollian");
         api.login();
+    }
+
+    @Test
+    public void test5_1() {
+        PowerMockito.replace(Whitebox.getMethod(Api.class, "genKey", String.class, long.class))
+                .with(Whitebox.getMethod(getClass(), "replaceGenKey", String.class, long.class));
+        System.out.println(Api.genKey("aaa", 1000));
+    }
+
+    public static String replaceGenKey(String name, long time) {
+        System.out.println("replace, param is " + name + "," + time);
+        return name;
     }
 
     /**
@@ -131,17 +178,26 @@ public class ApiPowerMockitoTest {
     @Test
     public void test6() throws Exception {
         Api mockApi = PowerMockito.mock(Api.class);
-        //spy是不可以的！！
-//        Api mockApi = PowerMockito.spy(api);
-
-        PowerMockito.when(mockApi, Whitebox.getMethod(Api.class, "checkName", String.class))
-                .withArguments(Mockito.anyString())
+//        PowerMockito.doReturn(false)
+//                .when(mockApi, "checkName", Mockito.anyString());
+        PowerMockito.when(mockApi, "checkName", Mockito.anyString())
                 .thenReturn(false);
-        //或者向下面这样调用
-//        PowerMockito.when(mockApi, "checkName", Mockito.anyString())
-//                .thenReturn(false);
-
         PowerMockito.doCallRealMethod().when(mockApi).login();
+        mockApi.login();
+    }
+
+    @Test
+    public void test6_1() throws Exception {
+        Api mockApi = PowerMockito.spy(new Api());
+        PowerMockito.doReturn(false)
+                .when(mockApi, "checkName",
+                        /*
+                        注意使用spy时，这里一定要写成any，而不是anyString!!!，
+                        因为login在调用checkName时，传入的成员变量name，值为null
+
+                        参数也可以是null、Mockito.isNull()
+                         */
+                        Mockito.any());
         mockApi.login();
     }
 
@@ -150,20 +206,63 @@ public class ApiPowerMockitoTest {
      */
     @Test
     public void test7() throws Exception {
-        System.out.println(Api.genKey("Amy", 100));
-
         PowerMockito.mockStatic(Api.class);
         PowerMockito.doReturn("wahaha")
                 .when(Api.class, "genKey", Mockito.anyString(), Mockito.anyLong());
-        //或者向下面这样调用
-//        PowerMockito.when(Api.genKey(Mockito.anyString(), Mockito.anyLong()))
-//                .thenReturn("wahaha");
-        System.out.println(Api.genKey("Amy", 100));
+        System.out.println(Api.genKey("Amy", 100L));
 
         //验证static方法调用
         PowerMockito.verifyStatic(Api.class, Mockito.times(1));
         //注意参数的设置，要么都用确定值，要么都用匹配器
 //        Api.genKey("Amy", 100);
         Api.genKey(Mockito.anyString(), Mockito.eq(100L));//结尾的L不能省略
+    }
+
+    @Test
+    public void test7_1() throws Exception {
+        PowerMockito.mockStatic(Api.class);
+        PowerMockito.doReturn("wahaha")
+                .when(Api.class, "genKeyInner", Mockito.anyString(), Mockito.anyLong());
+
+        System.out.println((String) Whitebox.invokeMethod(Api.class, "genKeyInner", "Amy", 100L));
+
+        //验证private static方法调用
+        PowerMockito.verifyPrivate(Api.class)
+                .invoke("genKeyInner", Mockito.anyString(), Mockito.anyLong());
+    }
+
+    @Test
+    public void test7_2() throws Exception {
+        PowerMockito.spy(Api.class);
+        PowerMockito.doReturn("wahaha")
+                .when(Api.class, "getCacheById", Mockito.any());
+        System.out.println(Api.getCache("111"));
+    }
+
+    @Test
+    public void test8() {
+        PowerMockito.stub(Whitebox.getMethod(Api.class, "getCacheById", String.class))
+                .toReturn("wahaha");
+        System.out.println(Api.getCache("111"));
+    }
+
+    @Test(expected = Exception.class)
+    public void test8_1() {
+        PowerMockito.stub(Whitebox.getMethod(Dao.class, "save"))
+                .toThrow(new Exception("111"));
+        api.realLogin();
+    }
+
+    @Test
+    public void test9() {
+        Stubber.stubMethod(Whitebox.getMethod(Api.class, "getCacheById", String.class),
+                "wahaha");
+        System.out.println(Api.getCache("111"));
+    }
+
+    @Test
+    public void test9_1() {
+        Stubber.stubMethod(Whitebox.getMethod(Dao.class, "delete"), true);
+        System.out.println(api.deleteUser());
     }
 }

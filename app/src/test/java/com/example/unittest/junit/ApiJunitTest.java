@@ -1,5 +1,6 @@
 package com.example.unittest.junit;
 
+import org.junit.Assume;
 import org.junit.Test;
 
 /**
@@ -25,9 +26,5 @@ public class ApiJunitTest extends BaseApiTest {
     @Test(timeout = 600)
     public void testTimeout() throws InterruptedException {
         api.timeout();
-    }
-
-    @Test
-    public void testAssume() {
     }
 }
