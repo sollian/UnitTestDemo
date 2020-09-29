@@ -6,6 +6,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.testing.FragmentScenario;
 import androidx.fragment.app.testing.FragmentScenario.FragmentAction;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.assertion.ViewAssertions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.example.unittest.MyFragmentX;
 import com.example.unittest.R;
@@ -36,5 +39,15 @@ public class FragmentTest {
                 Assert.assertEquals("test name", text);
             }
         });
+    }
+
+    @Test
+    public void testFragmentX2() {
+        Bundle bundle = new Bundle();
+        bundle.putString("name", "test name");
+        FragmentScenario.launchInContainer(MyFragmentX.class, bundle);
+
+        Espresso.onView(ViewMatchers.withId(R.id.name))
+                .check(ViewAssertions.matches(ViewMatchers.withText("test name")));
     }
 }

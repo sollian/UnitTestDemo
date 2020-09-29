@@ -16,5 +16,6 @@ public class SuppressStaticInitTest {
     @Test
     public void test() {
         new Dao();
+        System.out.println(Dao.LIB);
     }
 }

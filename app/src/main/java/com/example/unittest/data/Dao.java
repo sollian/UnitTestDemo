@@ -7,6 +7,8 @@ package com.example.unittest.data;
  */
 public class Dao {
 
+    public static String LIB = "test_lib";
+
     static {
         System.out.println("init Dao");
     }

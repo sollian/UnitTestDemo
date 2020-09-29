@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -116,7 +117,7 @@ public class ApiPowerMockitoTest {
 
         Api mockApi = PowerMockito.spy(api);
 //        mockApi.login();
-        PowerMockito.verifyPrivate(mockApi)
+        PowerMockito.verifyPrivate(mockApi, Mockito.atLeastOnce())
                 .invoke("checkName", Mockito.isNull());
     }
 
@@ -175,6 +176,7 @@ public class ApiPowerMockitoTest {
     /**
      * 修改private/final方法的返回值
      */
+    @Ignore
     @Test
     public void test6() throws Exception {
         Api mockApi = PowerMockito.mock(Api.class);
@@ -186,6 +188,7 @@ public class ApiPowerMockitoTest {
         mockApi.login();
     }
 
+    @Ignore
     @Test
     public void test6_1() throws Exception {
         Api mockApi = PowerMockito.spy(new Api());
