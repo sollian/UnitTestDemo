@@ -1,18 +1,19 @@
 package com.example.unittest.uiautomator;
 
-import android.app.Instrumentation;
-import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SdkSuppress;
 import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 import androidx.test.uiautomator.By;
 import androidx.test.uiautomator.UiDevice;
 import androidx.test.uiautomator.UiScrollable;
 import androidx.test.uiautomator.UiSelector;
 import androidx.test.uiautomator.Until;
+import com.example.unittest.MainActivity;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,25 +29,14 @@ public class MainActivityTest {
     private static final String PKG_NAME = "com.example.unittest";
     private static final int TIME_OUT = 5000;
 
-    private Instrumentation instrumentation;
     private UiDevice uiDevice;
+
+    @Rule
+    public ActivityTestRule activityTestRule = new ActivityTestRule(MainActivity.class);
 
     @Before
     public void setup() {
-        instrumentation = InstrumentationRegistry.getInstrumentation();
-        uiDevice = UiDevice.getInstance(instrumentation);
-
-        startActivity();
-    }
-
-    private void startActivity() {
-        Context context = instrumentation.getContext();
-        Intent intent = context.getPackageManager()
-                .getLaunchIntentForPackage(PKG_NAME);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(intent);
-        //等待启动完毕
-        uiDevice.wait(Until.hasObject(By.pkg(PKG_NAME).depth(0)), TIME_OUT);
+        uiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
     }
 
     @Test
@@ -61,9 +51,9 @@ public class MainActivityTest {
     @Test
     public void testListView() throws Exception {
         UiScrollable list = new UiScrollable(new UiSelector().resourceId("com.example.unittest:id/list"));
-        list.getChildByText(new UiSelector().className("android.widget.TextView"), "20")
+        list.getChildByText(new UiSelector().className("android.widget.TextView"), "5")
                 .click();
-        Assert.assertEquals("20",
+        Assert.assertEquals("5",
                 uiDevice.findObject(new UiSelector().resourceId("com.example.unittest:id/list_result")).getText());
     }
 

@@ -1,6 +1,11 @@
 package com.example.unittest.espresso;
 
-import android.widget.TextView;
+import android.app.Activity;
+import android.content.Context;
+import android.os.Build;
+import android.provider.Settings;
+import android.util.Log;
+import android.widget.Toast;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -17,6 +22,7 @@ import com.example.unittest.MainActivity;
 import com.example.unittest.R;
 import java.util.Map;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +32,6 @@ import org.junit.runner.RunWith;
  * Created by shouxianli on 2017/3/2.
  */
 @RunWith(AndroidJUnit4.class)
-@LargeTest
 public class MainActivityTest {
 
     /**
@@ -60,7 +65,9 @@ public class MainActivityTest {
         //AdapterView使用onData方法匹配
         Espresso.onData(
                 Matchers.allOf(
-                        Matchers.is(Matchers.instanceOf(Map.class)),
+                        //item对应的数据类型是Map
+                        Matchers.instanceOf(Map.class),
+                        //定位到map的value是50的那个item
                         Matchers.hasValue("50")
                 )
         ).perform(ViewActions.click());
@@ -97,10 +104,11 @@ public class MainActivityTest {
         //通过文本"确定"找到对话框上的确定按钮，执行点击事件，关闭对话框
         Espresso.onView(ViewMatchers.withText("确定"))
                 .perform(ViewActions.click());
-        //执行点击返回按钮事件，关闭跳转到RecycleviewActivity
+        //执行点击返回按钮事件，回到MainActivity
         Espresso.pressBack();
     }
 
+    @Ignore
     @Test
     public void testWebView() {
         //通过文本RecycleView找到按钮，并执行点击事件，跳转到WebViewActivity

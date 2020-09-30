@@ -1,5 +1,6 @@
 package com.example.unittest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -42,7 +43,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         final TextView vListResult = findViewById(R.id.list_result);
         ListView vList = findViewById(R.id.list);
         List<Map<String, String>> data = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             Map<String, String> map = new ArrayMap<>();
             map.put("id", String.valueOf(i));
             data.add(map);
@@ -111,6 +112,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        vSum.setText(data.getStringExtra("data"));
+        if (resultCode == Activity.RESULT_OK) {
+            vSum.setText(data.getStringExtra("data"));
+        }
     }
 }

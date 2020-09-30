@@ -10,6 +10,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 import com.example.unittest.WebViewActivity;
 import org.hamcrest.Matchers;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,7 @@ public class WebViewActivityTest {
     @Rule
     public ActivityTestRule activityTestRule = new ActivityTestRule(WebViewActivity.class, false);
 
+    @Ignore
     @Test
     public void test() {
         //传递数据到WebViewActivity

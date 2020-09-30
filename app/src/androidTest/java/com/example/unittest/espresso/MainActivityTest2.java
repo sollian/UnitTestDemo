@@ -48,8 +48,10 @@ public class MainActivityTest2 {
         Intents.intending(IntentMatchers.hasComponent("com.example.unittest.RecycleviewActivity"))
                 .respondWith(activityResult);
 
+        //会调用startForResult
         Espresso.onView(ViewMatchers.withId(R.id.go_list))
                 .perform(ViewActions.click());
+        //onActivityResult调用会修改sum元素的显示
         Espresso.onView(ViewMatchers.withId(R.id.sum))
                 .check(ViewAssertions.matches(ViewMatchers.withText("hello world")));
     }

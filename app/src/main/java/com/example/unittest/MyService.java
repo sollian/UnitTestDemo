@@ -2,6 +2,7 @@ package com.example.unittest;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import androidx.annotation.Nullable;
@@ -20,7 +21,9 @@ public class MyService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        msg = intent.getStringExtra("test");
+        Log.i(tag, "-------onBind-------");
+        return new MyBinder(this);
     }
 
     @Override
@@ -48,5 +51,18 @@ public class MyService extends Service {
 
     public String getMsg() {
         return msg;
+    }
+
+    public static class MyBinder extends Binder {
+
+        private final MyService service;
+
+        public MyBinder(MyService service) {
+            this.service = service;
+        }
+
+        public MyService getService() {
+            return service;
+        }
     }
 }

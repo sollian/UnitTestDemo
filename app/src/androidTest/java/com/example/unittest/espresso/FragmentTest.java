@@ -1,6 +1,8 @@
 package com.example.unittest.espresso;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -35,7 +37,7 @@ public class FragmentTest {
                 TextView vName = fragment.getView().findViewById(R.id.name);
 
                 String text = vName.getText().toString();
-                Log.d("MyFragmentX", text);
+                System.out.println(text);
                 Assert.assertEquals("test name", text);
             }
         });
