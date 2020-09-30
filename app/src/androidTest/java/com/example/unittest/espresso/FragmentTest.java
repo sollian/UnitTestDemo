@@ -1,9 +1,6 @@
 package com.example.unittest.espresso;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.util.Log;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.testing.FragmentScenario;
@@ -19,6 +16,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/9/27.
  */
 @RunWith(AndroidJUnit4.class)

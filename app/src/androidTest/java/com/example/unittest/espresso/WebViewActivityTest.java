@@ -16,7 +16,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Created by shihao on 2017/3/3.
+ * 测试类
+ * Created by shouxianli on 2020/7/29.
  */
 @RunWith(AndroidJUnit4.class)
 public class WebViewActivityTest {

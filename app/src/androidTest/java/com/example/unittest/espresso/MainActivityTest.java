@@ -1,11 +1,5 @@
 package com.example.unittest.espresso;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Build;
-import android.provider.Settings;
-import android.util.Log;
-import android.widget.Toast;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -16,7 +10,6 @@ import androidx.test.espresso.web.sugar.Web;
 import androidx.test.espresso.web.webdriver.DriverAtoms;
 import androidx.test.espresso.web.webdriver.Locator;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import com.example.unittest.MainActivity;
 import com.example.unittest.R;
@@ -29,7 +22,7 @@ import org.junit.runner.RunWith;
 
 /**
  * 测试类
- * Created by shouxianli on 2017/3/2.
+ * Created by shouxianli on 2020/7/29.
  */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {

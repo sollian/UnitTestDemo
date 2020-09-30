@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/9/29.
  */
 @RunWith(AndroidJUnit4.class)

@@ -23,6 +23,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * 测试类
+ * Created by shouxianli on 2020/7/29.
+ */
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest3 {
@@ -71,7 +75,7 @@ public class MainActivityTest3 {
                         childAtPosition(
                                 Matchers.allOf(ViewMatchers.withId(R.id.activity_main),
                                         childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(
+                                                IsInstanceOf.instanceOf(
                                                         android.widget.LinearLayout.class),
                                                 3)),
                                 3),
@@ -80,7 +84,7 @@ public class MainActivityTest3 {
     }
 
     private static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
+            Matcher<View> parentMatcher, int position) {
 
         return new TypeSafeMatcher<View>() {
             @Override

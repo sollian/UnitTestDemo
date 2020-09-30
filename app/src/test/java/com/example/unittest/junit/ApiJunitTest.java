@@ -1,6 +1,5 @@
 package com.example.unittest.junit;
 
-import org.junit.Assume;
 import org.junit.Test;
 
 /**

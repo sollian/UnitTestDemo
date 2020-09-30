@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 
 /**
  * 测试Intent相关
- * Created by shihao on 2017/3/2.
+ * Created by shouxianli on 2020/7/29.
  */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest2 {

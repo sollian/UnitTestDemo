@@ -1,6 +1,5 @@
 package com.example.unittest.uiautomator;
 
-import android.util.Log;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SdkSuppress;
 import androidx.test.platform.app.InstrumentationRegistry;

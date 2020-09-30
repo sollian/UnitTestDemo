@@ -14,6 +14,8 @@ import org.robolectric.Robolectric;
 import org.robolectric.android.controller.FragmentController;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/9/27.
  */
 public class FragmentTest extends BaseRobolectricTest {

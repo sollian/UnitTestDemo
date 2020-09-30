@@ -9,9 +9,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/9/17.
  */
 public class DemoTest {
+
     private static Api api;
 
     @BeforeClass

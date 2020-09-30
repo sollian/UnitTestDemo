@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/9/28.
  */
 public class HamcrestTest {
@@ -80,7 +82,7 @@ public class HamcrestTest {
         Assert.assertThat("Hello", Matchers.is("Hello"));
         Assert.assertThat("Hello", Matchers.equalTo("Hello"));
         //若要判断是同一个对象，可使用sameInstance或者theInstance（两者完全相同）
-        String newStr = new String("Hello");
+        String newStr = "Hello";
         Assert.assertThat(newStr, Matchers.is("Hello"));
         //下面断言失败
 //        Assert.assertThat(newStr, Matchers.sameInstance("Hello"));

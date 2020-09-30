@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
+ * 测试类
+ *
  * @author shouxianli on 2020/9/29.
  */
 @RunWith(AndroidJUnit4.class)
@@ -45,7 +47,7 @@ public class PreTest {
 
     @Test
     public void testThread() {
-        final Activity activity = activityTestRule.getActivity();
+        Activity activity = activityTestRule.getActivity();
 
         activity.runOnUiThread(new Runnable() {
             @Override
