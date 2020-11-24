@@ -2,7 +2,9 @@ package com.example.unittest.junit.param;
 
 import com.example.unittest.junit.BaseApiTest;
 import java.util.Arrays;
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -49,6 +51,16 @@ public class ApiParamTest1 extends BaseApiTest {
                 {2, 4, 6},
                 {4, 10, 14}
         });
+    }
+
+    @BeforeClass
+    public static void setupClass() {
+        System.out.println("beforeClass");
+    }
+
+    @AfterClass
+    public static void destroyClass() {
+        System.out.println("destroyClass");
     }
 
     @Test

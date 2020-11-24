@@ -1,6 +1,8 @@
 package com.example.unittest.junit.theory;
 
+import org.junit.AfterClass;
 import org.junit.Assume;
+import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.FromDataPoints;
 import org.junit.experimental.theories.Theories;
@@ -34,6 +36,15 @@ public class TheoryTest {
         };
     }
 
+    @BeforeClass
+    public static void setupClass() {
+        System.out.println("beforeClass");
+    }
+
+    @AfterClass
+    public static void destroyClass() {
+        System.out.println("destroyClass");
+    }
 
     @Theory
     public void testParam(String name, int age) {
