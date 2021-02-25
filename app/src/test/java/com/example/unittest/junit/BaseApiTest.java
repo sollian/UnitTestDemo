@@ -1,6 +1,8 @@
 package com.example.unittest.junit;
 
 import com.example.unittest.data.Api;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.BeforeClass;
 
 /**
@@ -9,8 +11,19 @@ import org.junit.BeforeClass;
  * @author shouxianli on 2020/7/15.
  */
 public abstract class BaseApiTest {
+    private static final String TAG = "BaseApiTest";
 
     protected static Api api;
+
+    @Before
+    public void setup11() {
+        System.out.println(TAG + " before");
+    }
+
+    @After
+    public void clear11() {
+        System.out.println(TAG + " after");
+    }
 
     /**
      * 每个测试方法都会重新创建类
