@@ -35,12 +35,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
         findViewById(R.id.go_web).setOnClickListener(this);
         findViewById(R.id.go_list).setOnClickListener(this);
 
-        vNum1 = (EditText) findViewById(R.id.num1);
-        vNum2 = (EditText) findViewById(R.id.num2);
-        vSum = (TextView) findViewById(R.id.sum);
+        vNum1 = findViewById(R.id.num1);
+        vNum2 = findViewById(R.id.num2);
+        vSum = findViewById(R.id.sum);
         findViewById(R.id.calculate).setOnClickListener(this);
 
-        final TextView vListResult = findViewById(R.id.list_result);
+        TextView vListResult = findViewById(R.id.list_result);
         ListView vList = findViewById(R.id.list);
         List<Map<String, String>> data = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {
@@ -75,25 +75,24 @@ public class MainActivity extends BaseActivity implements OnClickListener {
                 Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.go_web: {
-                Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                Intent intent = new Intent(this, WebViewActivity.class);
                 intent.putExtra(WebViewActivity.EXTRA_URL, "https://m.baidu.com");
                 startActivity(intent);
             }
             break;
-            case R.id.go_list: {
-                Intent intent = new Intent(MainActivity.this, RecycleviewActivity.class);
+            case R.id.go_list:
+                Intent intent = new Intent(this, RecycleviewActivity.class);
                 startActivityForResult(intent, 0x1000);
-            }
-            break;
+                break;
             case R.id.calculate:
                 String str = vNum1.getText().toString().trim();
                 if (TextUtils.isEmpty(str)) {
-                    Toast.makeText(MainActivity.this, "请输入数字1", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请输入数字1", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 String str2 = vNum2.getText().toString().trim();
                 if (TextUtils.isEmpty(str2)) {
-                    Toast.makeText(MainActivity.this, "请输入数字2", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请输入数字2", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {

@@ -11,13 +11,13 @@ public class MyApplication extends Application {
 
     private static Application mApplication;
 
+    public static Application getInstance() {
+        return mApplication;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-    }
-
-    public static Application getInstance() {
-        return mApplication;
     }
 }

@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * activity基类
+ *
  * @author shouxianli on 2020/7/17.
  */
 public class BaseActivity extends AppCompatActivity {

@@ -1,7 +1,5 @@
 package com.example.unittest.kotlin
 
-import kotlin.system.exitProcess
-
 /**
  * @author shouxianli on 2021/5/12.
  */

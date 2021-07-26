@@ -13,7 +13,7 @@ public class Dao {
         System.out.println("init Dao");
     }
 
-    private int id;
+    private final int id;
 
     public Dao() {
         id = 11;

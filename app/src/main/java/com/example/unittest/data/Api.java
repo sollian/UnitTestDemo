@@ -17,6 +17,16 @@ public class Api {
         return name + '_' + time;
     }
 
+    public static String getCache(String key) {
+        System.out.println("getCache");
+        return "prefix_" + getCacheById(key);
+    }
+
+    public static String getCacheById(String key) {
+        System.out.println("getCacheById");
+        return key;
+    }
+
     public void create() {
         System.out.println("初始化api资源");
     }
@@ -117,15 +127,5 @@ public class Api {
     public String getTel() {
         System.out.println("getTel");
         return "123456";
-    }
-
-    public static String getCache(String key) {
-        System.out.println("getCache");
-        return "prefix_" + getCacheById(key);
-    }
-
-    public static String getCacheById(String key) {
-        System.out.println("getCacheById");
-        return key;
     }
 }

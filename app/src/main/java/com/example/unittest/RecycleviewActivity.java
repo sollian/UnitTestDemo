@@ -21,7 +21,7 @@ public class RecycleviewActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycleview);
-        recyclerView = (RecyclerView) findViewById(R.id.recycleview);
+        recyclerView = findViewById(R.id.recycleview);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
@@ -61,7 +61,7 @@ public class RecycleviewActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(RecViewHolder holder, final int position) {
+        public void onBindViewHolder(RecViewHolder holder, int position) {
             holder.tvItem.setText(data.get(position));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,7 +82,7 @@ public class RecycleviewActivity extends BaseActivity {
 
             public RecViewHolder(View itemView) {
                 super(itemView);
-                tvItem = (TextView) itemView.findViewById(R.id.tv_item);
+                tvItem = itemView.findViewById(R.id.tv_item);
             }
         }
 
