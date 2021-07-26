@@ -18,6 +18,7 @@ class Mother() {
     }
 
     fun giveMoney(): Int {
+        println("giveMoney")
         return 100
     }
 

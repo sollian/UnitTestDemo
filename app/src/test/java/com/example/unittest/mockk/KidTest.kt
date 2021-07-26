@@ -1,7 +1,30 @@
 package com.example.unittest.mockk
 
-import com.example.unittest.kotlin.*
-import io.mockk.*
+import com.example.unittest.kotlin.Ext
+import com.example.unittest.kotlin.Kid
+import com.example.unittest.kotlin.Mother
+import com.example.unittest.kotlin.Obj
+import com.example.unittest.kotlin.Util
+import com.example.unittest.kotlin.UtilCompanion
+import com.example.unittest.kotlin.UtilJava
+import com.example.unittest.kotlin.UtilKotlin
+import com.example.unittest.kotlin.UtilKotlinSingleton
+import com.example.unittest.kotlin.extensionFunc2
+import io.mockk.Runs
+import io.mockk.confirmVerified
+import io.mockk.every
+import io.mockk.excludeRecords
+import io.mockk.just
+import io.mockk.justRun
+import io.mockk.mockk
+import io.mockk.mockkConstructor
+import io.mockk.mockkObject
+import io.mockk.mockkStatic
+import io.mockk.slot
+import io.mockk.spyk
+import io.mockk.unmockkAll
+import io.mockk.verify
+import io.mockk.verifySequence
 import org.junit.After
 import org.junit.Assert
 import org.junit.Test
@@ -133,6 +156,22 @@ open class KidTest {
         Assert.assertEquals("Tsai", UtilKotlin.ok())
         Assert.assertEquals("hello", UtilKotlinSingleton.ok())
         Assert.assertEquals("haha", UtilCompanion.ok())
+    }
+
+    @Test
+    fun testObject() {
+        mockkStatic(UtilJava::class)
+        every {
+            UtilJava.create()
+        } returns mockk()
+
+        mockkObject(UtilKotlinSingleton)
+        every {
+            UtilKotlinSingleton.ok()
+        } returns ""
+
+        UtilKotlinSingleton.ok()
+        Assert.assertTrue(true)
     }
 
     @Test

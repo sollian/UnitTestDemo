@@ -4,7 +4,15 @@ package com.example.unittest.kotlin
  * @author shouxianli on 2021/5/11.
  */
 object UtilKotlinSingleton {
+
+    val utilJava = UtilJava.create()
+
+    init {
+        println("UtilKotlinSingleton#初始化块")
+    }
+
     fun ok(): String {
+        println("UtilKotlinSingleton.ok")
         return "UtilKotlinSingleton.ok()"
     }
 
@@ -13,7 +21,7 @@ object UtilKotlinSingleton {
         call2("")
     }
 
-    private fun call2(str:String) {
+    private fun call2(str: String) {
         println("call2")
     }
 }
