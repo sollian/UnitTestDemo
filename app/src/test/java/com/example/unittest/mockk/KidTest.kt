@@ -6,11 +6,14 @@ import com.example.unittest.kotlin.Mother
 import com.example.unittest.kotlin.Obj
 import com.example.unittest.kotlin.Util
 import com.example.unittest.kotlin.UtilCompanion
+import com.example.unittest.kotlin.UtilCompanion2
 import com.example.unittest.kotlin.UtilJava
 import com.example.unittest.kotlin.UtilKotlin
 import com.example.unittest.kotlin.UtilKotlinSingleton
 import com.example.unittest.kotlin.extensionFunc2
+import com.example.unittest.kotlin.topAdd
 import io.mockk.Runs
+import io.mockk.clearAllMocks
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.excludeRecords
@@ -95,7 +98,7 @@ open class KidTest {
         val mother = mockk<Mother>(relaxed = true)
         val kid = Kid(mother)
 
-        val slot = slot<Int>()
+        var slot = slot<Int>()
 
         every {
             mother.inform(capture(slot))
@@ -108,6 +111,15 @@ open class KidTest {
         kid.wantMoney()
 
         Assert.assertEquals(0, slot.captured)
+
+        slot = slot()
+        every {
+            mother.add(capture(slot), any())
+        } answers { //此处不能使用returns
+            slot.captured + 10
+        }
+
+        print(mother.add(1, 2))
     }
 
     @Test
@@ -143,13 +155,21 @@ open class KidTest {
             UtilCompanion.ok()
         } returns "haha"
 
+        //kotlin的companion2中的static方法
+        mockkObject(UtilCompanion2.Companion)
+        every {
+            UtilCompanion2.ok()
+        } returns "haha"
+
         util.ok()
 
         verifySequence {
+//            UtilJava.create()
             UtilJava.ok()
             UtilKotlin.ok()
             UtilKotlinSingleton.ok()
             UtilCompanion.ok()
+            UtilCompanion2.ok()
         }
 
         Assert.assertEquals("Joe", UtilJava.ok())
@@ -318,6 +338,22 @@ open class KidTest {
         }
     }
 
+    @Test
+    fun testTopFunc() {
+        //包名+编译后的类名
+        mockkStatic("com.example.unittest.kotlin.DemoKt")
+        every {
+            topAdd(ofType<Long>())
+        } just Runs
+
+//        Assert.assertEquals(10, topAdd(1))
+        topAdd(100L)
+
+        verify {
+            topAdd(ofType<Long>())
+        }
+    }
+
     /**
      * 可变参数
      */
@@ -382,9 +418,9 @@ open class KidTest {
     fun testPrivateField() {
         val mother = spyk(Mother(), recordPrivateCalls = true)
 
-        every {
-            mother getProperty "age"
-        } returns 30
+//        every {
+//            mother getProperty "age"
+//        } returns 30
 
 //        every {
 //            mother setProperty "age" value less(20)
@@ -467,9 +503,28 @@ open class KidTest {
         mother.quit(1)
     }
 
+    @Test
+    fun testTimeOut() {
+        mockk<Mother>() {
+            every {
+                giveMoney()
+            } returns 20
+
+            Thread {
+                Thread.sleep(200)
+                giveMoney()
+            }.start()
+
+            verify(timeout = 300) {
+                giveMoney()
+            }
+        }
+    }
+
     @After
     fun clear() {
         unmockkAll()
+        clearAllMocks()
     }
 
     interface ClsWithManyMany {

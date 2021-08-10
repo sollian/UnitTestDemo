@@ -1,3 +1,5 @@
+//@file:JvmName("DemoGKt") //修改生成的java代码的类名
+
 package com.example.unittest.kotlin
 
 /**
@@ -11,3 +13,11 @@ class Ext {
 }
 
 fun Obj.extensionFunc2() = value + 5
+
+@JvmOverloads
+fun topAdd(num1: String, num2: Int = 45) {
+}
+
+@JvmOverloads
+fun topAdd(num1: Long, num2: Int = 45) {
+}

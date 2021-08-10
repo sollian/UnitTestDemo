@@ -5,7 +5,7 @@ package com.example.unittest.kotlin
  */
 object UtilKotlinSingleton {
 
-    val utilJava = UtilJava.create()
+//    val utilJava = UtilJava.create()
 
     init {
         println("UtilKotlinSingleton#初始化块")

@@ -9,5 +9,6 @@ class Util {
         UtilKotlin.ok()
         UtilKotlinSingleton.ok()
         UtilCompanion.ok()
+        UtilCompanion2.ok()
     }
 }
