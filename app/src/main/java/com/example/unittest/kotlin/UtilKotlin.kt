@@ -5,8 +5,9 @@ package com.example.unittest.kotlin
  */
 object UtilKotlin {
     @JvmStatic
-    fun ok(): String {
-        return "UtilKotlin.ok()"
+    fun ok(): Unit {
+        print("UtilKotlin#ok")
+//        return "UtilKotlin.ok()"
     }
 
     fun ok2(): String {

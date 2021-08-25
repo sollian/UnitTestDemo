@@ -134,9 +134,15 @@ open class KidTest {
 
         //kotlin的object中的方法，注意，方法必须添加@JvmStatic注解
         mockkStatic(UtilKotlin::class)
-        every {
-            UtilKotlin.ok()
-        } returns "Tsai"
+        //every控制返回值，方法体不执行
+        //justRun返回Unit，方法体不执行
+        //都不写的话，UtilKotlin.ok()执行实际方法体，并返回值
+//        every {
+//            UtilKotlin.ok()
+//        } returns "Tsai"
+//        justRun {
+//            UtilKotlin.ok()
+//        }
 
         //kotlin中的singleton
         mockkObject(UtilKotlinSingleton)
@@ -173,7 +179,7 @@ open class KidTest {
         }
 
         Assert.assertEquals("Joe", UtilJava.ok())
-        Assert.assertEquals("Tsai", UtilKotlin.ok())
+//        Assert.assertEquals("Tsai", UtilKotlin.ok())
         Assert.assertEquals("hello", UtilKotlinSingleton.ok())
         Assert.assertEquals("haha", UtilCompanion.ok())
     }
