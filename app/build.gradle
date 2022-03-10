@@ -47,7 +47,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    packagingOptions{
+    packagingOptions {
 
     }
 }
@@ -63,10 +63,15 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-    //JMockit
+    /*JMockit 需要在junit之前引入
+    >=1.42的版本，需要配置-javaagent。见：
+     https://github.com/hzdavid/jmockit.cn/issues/22
+    https://jmockit.github.io/changes.html#:~:text=JMockit%20now%20requires%20the%20use%20of%20the%20%22%2Djavaagent%22%20JVM%20initialization%20parameter.%20See%20Running%20tests%20with%20JMockit.
+    本地可以使用1.41版本进行jmockit的测试
+    */
     testImplementation 'org.jmockit:jmockit:1.49'
 
-    //junit
+    // junit
 //    testImplementation 'junit:junit:4.13.2'
 
     //mockito
