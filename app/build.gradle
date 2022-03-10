@@ -64,10 +64,10 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     //JMockit
-    implementation 'org.jmockit:jmockit:1.49'
+    testImplementation 'org.jmockit:jmockit:1.49'
 
     //junit
-    testImplementation 'junit:junit:4.13.2'
+//    testImplementation 'junit:junit:4.13.2'
 
     //mockito
     testImplementation "org.mockito:mockito-core:2.8.9"
@@ -81,7 +81,7 @@ dependencies {
     testImplementation "org.powermock:powermock-classloading-xstream:1.7.1"
 
     //mockk，测试kotlin的库
-    testImplementation 'io.mockk:mockk:1.12.0'
+    testImplementation 'io.mockk:mockk:1.12.1'
 
     //robolectric  https://oss.sonatype.org/content/groups/public/org/robolectric/
     testImplementation "org.robolectric:robolectric:4.4"
@@ -89,22 +89,22 @@ dependencies {
     //hamcrest 匹配器
     testImplementation "org.hamcrest:hamcrest-library:1.3"
 
-    testImplementation 'androidx.test:rules:1.2.0'
-    testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'androidx.test:rules:1.4.0'
+    testImplementation 'androidx.test.ext:junit:1.1.3'
 
     //这里一定要是debugImplementation
     debugImplementation 'androidx.fragment:fragment-testing:1.2.0'
 
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     //espresso
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 //    androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
-    androidTestImplementation('androidx.test.espresso:espresso-contrib:3.2.0') {
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.4.0'
+    androidTestImplementation('androidx.test.espresso:espresso-contrib:3.4.0') {
         transitive false
     }
-    androidTestImplementation 'androidx.test.espresso:espresso-web:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.4.0'
 
     //uiautomator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator-v18:2.2.0-alpha1'
