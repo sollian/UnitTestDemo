@@ -13,7 +13,7 @@ import org.junit.Test;
  *
  * @author shouxianli on 2020/11/24.
  */
-public class ApiJmockitTest4 {
+public class ApiJmockitTest4_capturing使用 {
 
     // 测试用户ID
     long testUserId = 123456l;
